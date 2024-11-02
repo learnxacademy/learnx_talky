@@ -31,8 +31,6 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof ADD_TOAST | typeof UPDATE_TOAST | typeof DISMISS_TOAST | typeof REMOVE_TOAST;
-
 type Action =
   | {
       type: typeof ADD_TOAST
