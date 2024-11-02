@@ -1,24 +1,24 @@
 'use client'
 
 import { Button } from '@/components/ui/button';
-import { toast, useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/use-toast'; // Only import useToast, not toast
 import { useGetCallById } from '@/hooks/useGetCallById';
 import { useUser } from '@clerk/nextjs';
 import { useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
-const Table = ({ title, description }: { title: string; description: string;}) => (
+const Table = ({ title, description }: { title: string; description: string; }) => (
   <div className="flex flex-col items-start gap-2 xl:flex-row">
     <h1 className="text-base font-medium text-sky-1 lg:text-xl xl:min-w-32">{title}:</h1>
     <h1 className="truncate text-sm font-bold max-sm:max-w-[320px] lg:text-xl">{description}</h1>
   </div>
-)
+);
 
 const PersonalRoom = () => {
   const { user } = useUser();
   const meetingId = user?.id;
-  const { toast } = useToast();
+  const { toast } = useToast(); // Destructure toast from useToast
   const client = useStreamVideoClient();
   const router = useRouter();
 
@@ -27,19 +27,19 @@ const PersonalRoom = () => {
   const { call } = useGetCallById(meetingId!);
 
   const startRoom = async () => {
-    if(!client || !user) return;
+    if (!client || !user) return;
 
-    if(!call) {
-      const newCall = client.call('default', meetingId!)  
-      
+    if (!call) {
+      const newCall = client.call('default', meetingId!)
+
       await newCall.getOrCreate({
         data: {
           starts_at: new Date().toISOString(),
         }
-      }) 
+      });
     }
 
-    router.push(`/meeting/${meetingId}?personal=true`)
+    router.push(`/meeting/${meetingId}?personal=true`);
   }
 
   return (
@@ -67,7 +67,7 @@ const PersonalRoom = () => {
         </Button>
       </div>
     </section>
-  )
+  );
 }
 
-export default PersonalRoom
+export default PersonalRoom;

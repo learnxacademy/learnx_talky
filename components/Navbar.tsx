@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import MobileNav from './MobileNav'
-import { SignedIn, SignedOut, SignIn, UserButton } from '@clerk/nextjs'
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import MobileNav from './MobileNav';
+import { SignedIn, UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {
   return (
@@ -26,7 +26,7 @@ const Navbar = () => {
         <MobileNav />
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

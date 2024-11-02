@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Call, CallRecording } from '@stream-io/video-react-sdk';
 
@@ -11,11 +11,11 @@ import { useToast } from './ui/use-toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
-  const { endedCalls, upcomingCalls, callRecordings, isLoading } =
-    useGetCalls();
+  const { endedCalls, upcomingCalls, callRecordings, isLoading } = useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 
   const { toast } = useToast();
+
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -54,15 +54,15 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
           .flatMap((call) => call.recordings);
 
         setRecordings(recordings);
-    } catch (error) {
-      toast({ title: 'Try again later'})
-    }
+      } catch {
+        toast({ title: 'Try again later' });
+      }
     };
 
     if (type === 'recordings') {
       fetchRecordings();
     }
-  }, [type, callRecordings]);
+  }, [type, callRecordings, toast]);
 
   if (isLoading) return <Loader />;
 
@@ -79,8 +79,8 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
               type === 'ended'
                 ? '/icons/previous.svg'
                 : type === 'upcoming'
-                  ? '/icons/upcoming.svg'
-                  : '/icons/recordings.svg'
+                ? '/icons/upcoming.svg'
+                : '/icons/recordings.svg'
             }
             title={
               (meeting as Call).state?.custom?.description ||
